@@ -1,16 +1,16 @@
-import sqlite3
-import json
-import uuid
 import sys
 import os
+import json
+import uuid
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from config import get_connection
 from execute.action_router import route
 
 
 def run_execution():
-    connection = sqlite3.connect("revenue_recovery.db")
+    connection = get_connection()
     cursor = connection.cursor()
 
     cursor.execute(
@@ -25,9 +25,9 @@ def run_execution():
     decided_events = cursor.fetchall()
     print(f"Found {len(decided_events)} decided event(s) to execute.")
 
-    for event_id, customer_id, raw_payload, action, params_json in decided_events:
-        params = json.loads(params_json)
-        payload = json.loads(raw_payload)
+    for event_id, customer_id, raw_payload_str, action, params_json in decided_events:
+        params = json.loads(params_json) if params_json else {}
+        payload = json.loads(raw_payload_str) if raw_payload_str else {}
 
         if action == "retry_payment":
             params["amount"] = payload.get("amount", 0)
@@ -37,21 +37,22 @@ def run_execution():
 
         result = route(action, params, customer_id)
 
+        action_id = str(uuid.uuid4())
         cursor.execute(
             """
             INSERT INTO actions_log (id, event_id, action, result, detail)
             VALUES (?, ?, ?, ?, ?)
             """,
-            (str(uuid.uuid4()), event_id, action, result["result"], result["detail"]),
+            (action_id, event_id, action, result["status"], result["detail"]),
         )
 
-        new_status = "escalated" if result["result"] == "escalated" else "resolved"
+        final_status = "resolved" if result["status"] == "success" else "failed"
         cursor.execute(
             "UPDATE events SET status = ? WHERE id = ?",
-            (new_status, event_id),
+            (final_status, event_id),
         )
 
-        print(f"Executed {event_id}: {action} -> {result['result']}")
+        print(f"  -> Executed action={action} for event {event_id}: status={result['status']}")
 
     connection.commit()
     connection.close()

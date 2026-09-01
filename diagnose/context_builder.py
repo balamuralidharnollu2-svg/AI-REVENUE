@@ -1,8 +1,12 @@
-import sqlite3
+import sys
+import os
 import json
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import get_connection
+
 def build_context(event_id):
-    connection = sqlite3.connect("revenue_recovery.db")
+    connection = get_connection()
     cursor = connection.cursor()
 
     cursor.execute(
@@ -15,7 +19,14 @@ def build_context(event_id):
     if event is None:
         raise ValueError(f"No event found with id {event_id}")
 
-    event_id, event_type, customer_id, raw_payload = event
+    event_id, event_type, customer_id, raw_payload_str = event
+
+    parsed_payload = {}
+    if raw_payload_str:
+        try:
+            parsed_payload = json.loads(raw_payload_str)
+        except Exception:
+            pass
 
     fake_history = {
         "past_failed_payments": 1,
@@ -26,7 +37,7 @@ def build_context(event_id):
     context = {
         "event_type": event_type,
         "customer_id": customer_id,
-        "raw_payload": json.loads(raw_payload),
+        "raw_payload": parsed_payload,
         "customer_history": fake_history,
     }
     return context

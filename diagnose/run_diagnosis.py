@@ -1,15 +1,15 @@
-import sqlite3
 import sys
 import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from config import get_connection
 from diagnose.groq_client import diagnose
 from diagnose.context_builder import build_context
 
 
 def run_diagnosis():
-    connection = sqlite3.connect("revenue_recovery.db")
+    connection = get_connection()
     cursor = connection.cursor()
 
     cursor.execute("SELECT id FROM events WHERE status = 'new'")
@@ -33,7 +33,7 @@ def run_diagnosis():
             (event_id,),
         )
 
-        print(f"Diagnosed {event_id}: {result['reason_category']} (confidence {result['confidence']})")
+        print(f"  -> Diagnosed event {event_id}: {result['reason_category']} (confidence: {result['confidence']:.2f})")
 
     connection.commit()
     connection.close()

@@ -358,7 +358,20 @@ def api_reset():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Mount the frontend directory
+from fastapi.responses import HTMLResponse
+
+# Serve index.html directly for root routes
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend")
+INDEX_HTML_PATH = os.path.join(FRONTEND_DIR, "index.html")
+
+@app.get("/", response_class=HTMLResponse)
+@app.get("/index.html", response_class=HTMLResponse)
+def serve_index():
+    if os.path.exists(INDEX_HTML_PATH):
+        with open(INDEX_HTML_PATH, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    return HTMLResponse(content="<h1>ARR Platform Ready</h1><p>Frontend loading...</p>")
+
+# Mount the frontend directory as fallback
 if os.path.exists(FRONTEND_DIR):
-    app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="static")
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR, html=True), name="static")

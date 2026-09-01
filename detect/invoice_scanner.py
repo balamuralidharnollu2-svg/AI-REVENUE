@@ -1,10 +1,13 @@
-import sqlite3
+import sys
+import os
 import uuid
 from datetime import date
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import get_connection
 
 def scan_invoices():
-    connection = sqlite3.connect("revenue_recovery.db")
+    connection = get_connection()
     cursor = connection.cursor()
 
     today = str(date.today())
@@ -40,11 +43,10 @@ def scan_invoices():
             (invoice_id,),
         )
 
-        print(f"Created event {event_id} for overdue invoice {invoice_id} (customer {customer_id}, ${amount})")
+        print(f"  -> Created event {event_id} for customer {customer_id} (amount: ${amount})")
 
     connection.commit()
     connection.close()
-
 
 if __name__ == "__main__":
     scan_invoices()
