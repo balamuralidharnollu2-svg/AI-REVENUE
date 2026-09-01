@@ -1,0 +1,9 @@
+{
+  "insufficient_funds": {"action": "retry_payment", "params": {"delay_hours": 48, "max_retries": 3}},
+  "expired_card": {"action": "send_update_link", "params": {"channel": "email"}},
+  "price_sensitive": {"action": "offer_discount", "params": {"max_percent": 10}},
+  "fraud_flag": {"action": "escalate_human", "params": {}},
+  "customer_dispute": {"action": "escalate_human", "params": {}},
+  "technical_error": {"action": "retry_payment", "params": {"delay_hours": 1, "max_retries": 1}},
+  "unknown": {"action": "escalate_human", "params": {}}
+}

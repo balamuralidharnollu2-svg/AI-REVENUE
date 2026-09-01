@@ -1,0 +1,1522 @@
+<!doctype html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>ARR — AI Revenue Recovery Platform</title>
+  
+  <!-- Tailwind CSS & FontAwesome Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            arr: {
+              lime: '#84cc16',
+              emerald: '#10b981',
+              dark: '#0f172a',
+              card: '#ffffff',
+              page: '#fafafa',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Elegostra Smooth Shadows & Cards */
+    .elegostra-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      border-radius: 1.5rem;
+    }
+    .elegostra-card-subtle {
+      background: #f8fafc;
+      border: 1px solid rgba(241, 245, 249, 1);
+      border-radius: 1.25rem;
+    }
+    .elegostra-pill-btn {
+      background-color: #111827;
+      color: #ffffff;
+      border-radius: 9999px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .elegostra-pill-btn:hover {
+      background-color: #1f2937;
+      transform: translateY(-1px);
+    }
+    .elegostra-pill-white {
+      background-color: #ffffff;
+      color: #111827;
+      border: 1px solid #e2e8f0;
+      border-radius: 9999px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .elegostra-pill-white:hover {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+    }
+    .orbit-dash {
+      stroke-dasharray: 6, 6;
+    }
+    .terminal-console::-webkit-scrollbar {
+      width: 5px;
+    }
+    .terminal-console::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    .terminal-console::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-[#fafafa] text-slate-900 font-sans antialiased min-h-full flex flex-col selection:bg-lime-200">
+
+  <!-- ========================================================== -->
+  <!-- VIEW 1: ELEGOSTRA-STYLE ARR CORPORATE LANDING PAGE         -->
+  <!-- ========================================================== -->
+  <div id="view-landing" class="w-full flex-grow flex flex-col transition-all duration-300">
+    
+    <!-- Top Navigation Bar (Matching Elegostra Screenshot 1) -->
+    <header class="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <!-- ARR Logo -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToTop()">
+        <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-lime-400 font-black text-lg shadow-md">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 17L12 22L22 17" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="text-xl font-extrabold tracking-tight text-slate-900">ARR</span>
+      </div>
+
+      <!-- Center Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+        <a href="#view-landing" class="text-slate-900 hover:text-slate-900 transition">Home</a>
+        <a href="#channels" class="hover:text-slate-900 transition">4 Channels</a>
+        <a href="#how-it-works" class="hover:text-slate-900 transition">How It Works</a>
+        <a href="#impact" class="hover:text-slate-900 transition">Measurable Impact</a>
+        <a href="#compliance-preview" class="hover:text-slate-900 transition">Guardrails</a>
+      </nav>
+
+      <!-- Right Login & Auth Pills -->
+      <div class="flex items-center space-x-3">
+        <button onclick="openAuthModal()" class="px-5 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 transition">
+          Log in
+        </button>
+        <button onclick="launchDashboard()" class="elegostra-pill-btn px-6 py-2.5 text-sm font-bold shadow-md shadow-slate-900/10 flex items-center gap-2">
+          <span>Launch Command Center</span>
+          <i class="fa-solid fa-arrow-right text-xs text-lime-400"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section (Pixel-faithful to Elegostra Screenshot 1) -->
+    <section class="w-full max-w-7xl mx-auto px-6 pt-12 pb-20 text-center relative overflow-hidden flex flex-col items-center">
+      
+      <!-- Pill Badge -->
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-lime-500/10 border border-lime-500/30 text-lime-800 text-xs font-bold mb-6">
+        <span class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></span>
+        <span>AUTONOMOUS REVENUE RECOVERY AGENT</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 max-w-4xl leading-[1.06] mb-6">
+        Artificial intelligence for revenue recovery
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed mb-8">
+        ARR helps companies detect revenue at risk, diagnose root-cause payment failures, and execute bounded recovery workflows to win back lost cash flow.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+        <button onclick="launchDashboard()" class="elegostra-pill-btn px-8 py-3.5 text-sm font-bold shadow-lg shadow-slate-900/15 flex items-center gap-2">
+          <span>Get Started</span>
+          <i class="fa-solid fa-arrow-right text-xs text-lime-400"></i>
+        </button>
+        <button onclick="triggerQuickSimulation()" class="elegostra-pill-white px-7 py-3.5 text-sm font-bold shadow-sm flex items-center gap-2">
+          <i class="fa-solid fa-play text-xs text-lime-600"></i>
+          <span>Simulate Recovery Scan</span>
+        </button>
+      </div>
+
+      <!-- Hero Visual Sculpture & Floating Cards (Elegostra 3D Petal & Widgets) -->
+      <div class="w-full max-w-5xl h-[460px] relative mx-auto flex items-center justify-center">
+        
+        <!-- Center Geometric Canvas Visual -->
+        <canvas id="petalCanvas" width="560" height="420" class="z-10 mx-auto max-w-full"></canvas>
+
+        <!-- Dashed Orbit Lines Background -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 460">
+          <path d="M 100 240 C 200 80, 800 80, 900 240 C 800 400, 200 400, 100 240 Z" fill="none" stroke="#e2e8f0" stroke-width="1.5" class="orbit-dash" />
+        </svg>
+
+        <!-- Floating Card 1: Top Left (Income / At Risk) -->
+        <div class="absolute top-4 left-2 sm:left-12 z-20 elegostra-card p-4 text-left w-52 shadow-xl animate-bounce" style="animation-duration: 6s;">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-medium">Recovered</span>
+            <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+              <i class="fa-solid fa-arrow-trend-up text-[8px]"></i> 32.4%
+            </span>
+          </div>
+          <div class="text-lg font-black text-slate-900 font-mono mt-0.5" id="hero-recovered-val">$14,205,890</div>
+          <div class="text-[10px] text-slate-400 mt-2 pt-2 border-t border-slate-100 flex justify-between">
+            <span>At risk volume:</span>
+            <span class="font-bold text-slate-700" id="hero-risk-val">$12,167.00</span>
+          </div>
+        </div>
+
+        <!-- Floating Card 2: Top Right (Bar Chart Spend/Recovery) -->
+        <div class="absolute top-6 right-2 sm:right-12 z-20 elegostra-card p-4 text-left w-48 shadow-xl">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-slate-800">Recovery SLA</span>
+            <span class="text-[10px] font-bold text-lime-600 bg-lime-50 px-1.5 py-0.5 rounded">Active</span>
+          </div>
+          <div class="h-14 flex items-end gap-2 justify-between">
+            <div class="w-full bg-slate-100 h-[40%] rounded-t"></div>
+            <div class="w-full bg-slate-200 h-[65%] rounded-t"></div>
+            <div class="w-full bg-lime-400 h-[92%] rounded-t shadow-sm"></div>
+            <div class="w-full bg-emerald-500 h-[78%] rounded-t"></div>
+          </div>
+          <div class="flex justify-between text-[8px] font-mono text-slate-400 mt-1.5">
+            <span>Scan</span>
+            <span>Diag</span>
+            <span class="font-bold text-lime-600">Action</span>
+            <span>Recv</span>
+          </div>
+        </div>
+
+        <!-- Floating Card 3: Bottom Left (Goal Badge) -->
+        <div class="absolute bottom-6 left-6 sm:left-24 z-20 elegostra-card px-4 py-3 text-left w-40 shadow-lg">
+          <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Guardrails</span>
+          <div class="text-xl font-extrabold text-slate-900 font-mono">100%</div>
+          <div class="text-[9px] text-emerald-600 font-bold flex items-center gap-1 mt-0.5">
+            <i class="fa-solid fa-circle-check"></i> SOC-2 Compliant
+          </div>
+        </div>
+
+        <!-- Floating Card 4: Bottom Right (Revenue Growth) -->
+        <div class="absolute bottom-4 right-6 sm:right-24 z-20 elegostra-card p-4 text-left w-48 shadow-lg">
+          <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Incremental Lift</div>
+          <div class="text-xl font-black text-emerald-600 font-mono" id="hero-incremental-val">+$42,345.00</div>
+          <div class="text-[10px] text-slate-500 mt-0.5">Financial analytics</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: SMARTER TOOLS FOR REVENUE RECOVERY (Matching Elegostra Screenshot 2 & 3) -->
+    <section id="channels" class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200/70">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div class="space-y-3 max-w-xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+            <i class="fa-solid fa-bolt text-emerald-600"></i>
+            <span>Smart Analytics & Interventions</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
+            Smarter tools for revenue recovery
+          </h2>
+        </div>
+        <p class="text-sm text-slate-500 max-w-md leading-relaxed">
+          Manage degradation, diagnose drop-offs, and track overdue receivables with clear insights, real-time telemetry, and bounded recovery workflows.
+        </p>
+      </div>
+
+      <!-- 4 Channels Grid (Matching Elegostra 3-card layout + 4th channel) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Channel 1: Payment Degradation -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-6 hover:shadow-xl transition duration-300">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800">
+              <i class="fa-solid fa-credit-card text-base"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Payment degradation</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Detect soft declines and gateway degradation instantly, automatically triggering sequenced mandate retries.
+            </p>
+          </div>
+
+          <!-- Card visual from Screenshot 3 -->
+          <div class="elegostra-card-subtle p-4 space-y-2">
+            <div class="flex justify-between text-[11px] font-mono">
+              <span class="text-slate-500">Recovered Amount</span>
+              <span class="font-bold text-slate-800" id="card-payment-stat">$6,100 / $10k</span>
+            </div>
+            <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-gradient-to-r from-lime-400 to-emerald-500 h-full rounded-full" style="width: 61%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Channel 2: Checkout Drop-off -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-6 hover:shadow-xl transition duration-300">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800">
+              <i class="fa-solid fa-cart-shopping text-base"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Checkout drop-off</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Win back abandoned checkouts with bounded Hinglish conversational voice agents and personalized payment links.
+            </p>
+          </div>
+
+          <!-- Card wallet visual from Screenshot 3 -->
+          <div class="elegostra-card-subtle p-4 relative overflow-hidden flex flex-col justify-between h-24">
+            <div class="flex justify-between items-center text-[10px] font-bold text-slate-400">
+              <span>VOICE DIALOG</span>
+              <span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Hinglish Model</span>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 font-mono">Total Balance Saved</div>
+              <div class="text-lg font-black text-slate-900 font-mono" id="card-checkout-stat">$28,400</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Channel 3: Failed Subscription -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-6 hover:shadow-xl transition duration-300">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800">
+              <i class="fa-solid fa-arrows-rotate text-base"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Failed subscription</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Identify subscription churn cohorts and formulate targeted discount or account update interventions.
+            </p>
+          </div>
+
+          <!-- Micro Cohort Visual -->
+          <div class="elegostra-card-subtle p-4 space-y-2">
+            <div class="flex justify-between text-[11px] font-mono">
+              <span class="text-slate-500">Cohort Retention</span>
+              <span class="font-bold text-purple-600">+84%</span>
+            </div>
+            <div class="h-6 flex items-end gap-1.5">
+              <div class="w-full bg-purple-200 h-[40%] rounded-t"></div>
+              <div class="w-full bg-purple-300 h-[60%] rounded-t"></div>
+              <div class="w-full bg-purple-500 h-[85%] rounded-t"></div>
+              <div class="w-full bg-emerald-400 h-[95%] rounded-t"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Channel 4: B2B Receivables Chaser -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-6 hover:shadow-xl transition duration-300">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800">
+              <i class="fa-solid fa-file-invoice-dollar text-base"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">B2B receivables chaser</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Automate promise-to-pay tracking with audit logs and compliant escalation for high-value aging invoices.
+            </p>
+          </div>
+
+          <!-- Transaction Monitor from Screenshot 3 -->
+          <div class="elegostra-card-subtle p-3 space-y-1.5 text-xs font-mono">
+            <div class="flex items-center justify-between pb-1 border-b border-slate-200 text-[10px]">
+              <span class="text-slate-500">Overdue Invoice</span>
+              <span class="text-amber-600 bg-amber-50 px-1 rounded font-bold">Escalate</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-slate-800">B2B Chaser</span>
+              <span class="font-bold text-emerald-600">+$2,450.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: THREE SIMPLE STEPS (Matching Elegostra Screenshot 4) -->
+    <section id="how-it-works" class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200/70 text-center">
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+        Three simple steps to recover revenue
+      </h2>
+      <p class="text-sm sm:text-base text-slate-500 max-w-xl mx-auto mb-16">
+        An autonomous three-step loop that helps your team detect financial loss, diagnose root cause, and recover cash in minutes.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        
+        <!-- Step 1 -->
+        <div class="elegostra-card p-8 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-lime-400/20 text-lime-700 font-black text-lg flex items-center justify-center font-mono">
+            01
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Detect revenue at risk</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Continuous background scanning monitors payment gateway failures, dropped checkout carts, and overdue invoice records.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="elegostra-card p-8 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-400/20 text-emerald-700 font-black text-lg flex items-center justify-center font-mono">
+            02
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">AI root-cause diagnosis</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Fast LLM intelligence inspects transaction metadata to categorize root causes: insufficient funds, expired cards, or customer disputes.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="elegostra-card p-8 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-slate-900 text-lime-400 font-black text-lg flex items-center justify-center font-mono">
+            03
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Bounded compliant execution</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Applies strict DND quiet windows and retry attempt limits, executing voice recovery, payment retries, or operator escalation.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: MEASURABLE IMPACT & WHY CHOOSE ARR (Matching Elegostra Screenshot 5) -->
+    <section id="impact" class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200/70">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+        
+        <!-- Left Big Metric -->
+        <div class="elegostra-card p-10 lg:w-1/2 space-y-6 text-left">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-lime-100 text-lime-800 text-xs font-bold">
+            <i class="fa-solid fa-chart-line text-lime-600"></i>
+            <span>Financial Intelligence</span>
+          </div>
+
+          <div>
+            <div class="text-5xl sm:text-6xl font-black text-slate-900 font-mono tracking-tight" id="impact-val">$42K+</div>
+            <p class="text-sm text-slate-500 font-medium mt-2">
+              Average recovered cash flow achieved across active customer cohorts after implementing ARR bounded workflows.
+            </p>
+          </div>
+
+          <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+            <div class="bg-emerald-500 h-full rounded-full" style="width: 78%;"></div>
+          </div>
+        </div>
+
+        <!-- Right Insights Cards -->
+        <div class="lg:w-1/2 space-y-6 text-left">
+          <div class="space-y-3">
+            <h3 class="text-3xl font-extrabold text-slate-900 tracking-tight">Why modern teams choose ARR</h3>
+            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+              ARR combines intelligent root-cause diagnosis with a clean operational dashboard. Gain real-time auditability, stop revenue leakage, and scale cash recovery with full compliance.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="elegostra-card p-5 space-y-2">
+              <div class="text-xs font-bold text-slate-400 uppercase font-mono">Efficiency Lift</div>
+              <div class="text-2xl font-black text-emerald-600 font-mono">+24%</div>
+              <p class="text-[11px] text-slate-500">Autonomous resolution without manual finance friction.</p>
+            </div>
+            <div class="elegostra-card p-5 space-y-2">
+              <div class="text-xs font-bold text-slate-400 uppercase font-mono">Stopping Rules</div>
+              <div class="text-2xl font-black text-indigo-600 font-mono">100% Enforced</div>
+              <p class="text-[11px] text-slate-500">Strict DND window and max 3 retry attempt protection.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-slate-200 py-10 text-center text-xs text-slate-400 font-mono">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center space-x-2">
+          <span class="font-extrabold text-slate-800">ARR</span>
+          <span>— AUTONOMOUS REVENUE RECOVERY AGENT</span>
+        </div>
+        <div>SOC-2 TYPE II • PCI-DSS LEVEL 1 • DND COMPLIANT</div>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <!-- ========================================================== -->
+  <!-- VIEW 2: ARR ENTERPRISE COMMAND CENTER DASHBOARD (MULTI-TAB)-->
+  <!-- ========================================================== -->
+  <div id="view-dashboard" class="w-full flex-grow flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6 hidden transition-all duration-300">
+    
+    <!-- Top Command Center Bar -->
+    <header class="elegostra-card p-4 sm:p-5 flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- Brand & Status -->
+      <div class="flex items-center space-x-4 w-full lg:w-auto justify-between lg:justify-start">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-lime-400 font-black text-lg shadow-md">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+              <span>ARR Command Center</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            </h2>
+            <p class="text-[10px] text-slate-400 font-mono">AI REVENUE RECOVERY AGENT • LIVE DATABASE LINKED</p>
+          </div>
+        </div>
+
+        <button onclick="returnToLanding()" class="lg:hidden p-2 rounded-lg bg-slate-100 text-slate-700 text-xs">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+      </div>
+
+      <!-- Segmented Navigation Tabs -->
+      <nav class="flex items-center p-1 bg-slate-100 rounded-xl text-xs font-semibold overflow-x-auto max-w-full" id="dashboard-nav">
+        <button class="nav-tab active px-4 py-2 rounded-lg text-white bg-slate-900 shadow transition flex items-center gap-2" data-tab="tab-overview">
+          <i class="fa-solid fa-chart-pie text-xs text-lime-400"></i>
+          <span>4 Channels Overview</span>
+        </button>
+        <button class="nav-tab px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2" data-tab="tab-interventions">
+          <i class="fa-solid fa-list-check text-xs"></i>
+          <span>Active Interventions (<span id="tab-count-badge">0</span>)</span>
+        </button>
+        <button class="nav-tab px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2" data-tab="tab-audit">
+          <i class="fa-solid fa-terminal text-xs"></i>
+          <span>Live Audit Trail</span>
+        </button>
+        <button class="nav-tab px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2" data-tab="tab-compliance">
+          <i class="fa-solid fa-scale-balanced text-xs"></i>
+          <span>Compliance Guardrails</span>
+        </button>
+        <button class="nav-tab px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-2" data-tab="tab-simulator">
+          <i class="fa-solid fa-vial text-xs"></i>
+          <span>Scenario Simulator</span>
+        </button>
+      </nav>
+
+      <!-- User Role and Controls -->
+      <div class="hidden lg:flex items-center space-x-3">
+        <button id="btn-quick-simulate" class="elegostra-pill-btn px-4 py-2 text-xs font-bold shadow-sm transition flex items-center gap-2">
+          <i class="fa-solid fa-play text-[10px] text-lime-400" id="quick-run-icon"></i>
+          <i class="fa-solid fa-circle-notch fa-spin text-[10px] hidden" id="quick-run-spinner"></i>
+          <span>Scan Pipeline</span>
+        </button>
+
+        <button id="btn-quick-reset" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition" title="Reset Database">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+
+        <button onclick="returnToLanding()" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition" title="Return to Landing">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- TAB 1: 4 CHANNELS & FINANCIAL LEDGER -->
+    <div id="tab-overview" class="tab-content space-y-6">
+      
+      <!-- Top Ledger Summary -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="elegostra-card p-5 space-y-1">
+          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">Total Measured Recovered</span>
+          <div class="text-3xl font-black text-emerald-600 font-mono" id="ledger-recovered">$14,205,890</div>
+          <p class="text-[11px] text-slate-500 flex items-center gap-1 font-medium">
+            <i class="fa-solid fa-arrow-trend-up text-emerald-600"></i>
+            <span class="text-emerald-600 font-bold">+32.4%</span> vs baseline
+          </p>
+        </div>
+
+        <div class="elegostra-card p-5 space-y-1">
+          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">Active Volume at Risk</span>
+          <div class="text-3xl font-black text-amber-600 font-mono" id="ledger-risk">$0</div>
+          <p class="text-[11px] text-slate-500 font-medium">Across payment, checkouts & subs</p>
+        </div>
+
+        <div class="elegostra-card p-5 space-y-1">
+          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">Recovery Success Ratio</span>
+          <div class="text-3xl font-black text-slate-900 font-mono" id="ledger-ratio">0%</div>
+          <p class="text-[11px] text-slate-500 font-medium">Benchmark target: 75%</p>
+        </div>
+
+        <div class="elegostra-card p-5 space-y-1">
+          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">Human-in-the-Loop Escalated</span>
+          <div class="text-3xl font-black text-rose-600 font-mono" id="ledger-escalated">0</div>
+          <p class="text-[11px] text-slate-500 font-medium">Requires operator signoff</p>
+        </div>
+      </div>
+
+      <!-- The 4 Core Category Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Category 1: Payment Degradation -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-4 hover:shadow-xl transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>Payment Degradation</span>
+              </span>
+              <span id="cat-payment-active" class="text-[10px] font-mono text-slate-400 bg-slate-100 px-2 py-0.5 rounded">0 active</span>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono text-slate-400 uppercase">Recovered / At Risk</div>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-2xl font-black text-slate-900 font-mono" id="cat-payment-recovered">$0</span>
+                <span class="text-xs text-slate-400">/</span>
+                <span class="text-xs font-bold text-slate-500 font-mono" id="cat-payment-risk">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-10 w-full flex items-end">
+            <svg class="w-full h-full" viewBox="0 0 100 30" preserveAspectRatio="none">
+              <path fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" d="M0,25 Q15,5 30,20 T60,8 T90,22 T100,5" />
+            </svg>
+          </div>
+
+          <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-[10px] font-mono">
+            <span class="text-slate-400">INTERVENTION:</span>
+            <span class="text-emerald-700 font-bold uppercase">Mandate retry sequencer</span>
+          </div>
+        </div>
+
+        <!-- Category 2: Checkout Abandonment -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-4 hover:shadow-xl transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-blue-800 bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Checkout Drop-off</span>
+              </span>
+              <span id="cat-checkout-active" class="text-[10px] font-mono text-slate-400 bg-slate-100 px-2 py-0.5 rounded">0 active</span>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono text-slate-400 uppercase">Recovered / At Risk</div>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-2xl font-black text-slate-900 font-mono" id="cat-checkout-recovered">$0</span>
+                <span class="text-xs text-slate-400">/</span>
+                <span class="text-xs font-bold text-slate-500 font-mono" id="cat-checkout-risk">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between text-[10px] font-mono text-slate-400">
+              <span>VOICE CONVERSION</span>
+              <span class="text-blue-600 font-bold" id="cat-checkout-rate">42%</span>
+            </div>
+            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div class="bg-blue-500 h-full rounded-full" id="cat-checkout-bar" style="width: 42%;"></div>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-[10px] font-mono">
+            <span class="text-slate-400">INTERVENTION:</span>
+            <span class="text-blue-700 font-bold uppercase">Hinglish Voice Recovery</span>
+          </div>
+        </div>
+
+        <!-- Category 3: Failed Subscription -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-4 hover:shadow-xl transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-800 bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Failed Subscription</span>
+              </span>
+              <span id="cat-sub-active" class="text-[10px] font-mono text-slate-400 bg-slate-100 px-2 py-0.5 rounded">0 active</span>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono text-slate-400 uppercase">Recovered / At Risk</div>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-2xl font-black text-slate-900 font-mono" id="cat-sub-recovered">$0</span>
+                <span class="text-xs text-slate-400">/</span>
+                <span class="text-xs font-bold text-slate-500 font-mono" id="cat-sub-risk">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-10 flex items-end justify-between px-1 gap-1.5">
+            <div class="w-full bg-purple-200 h-[30%] rounded-t"></div>
+            <div class="w-full bg-purple-300 h-[55%] rounded-t"></div>
+            <div class="w-full bg-purple-400 h-[40%] rounded-t"></div>
+            <div class="w-full bg-purple-500 h-[75%] rounded-t"></div>
+            <div class="w-full bg-purple-600 h-[90%] rounded-t"></div>
+          </div>
+
+          <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-[10px] font-mono">
+            <span class="text-slate-400">INTERVENTION:</span>
+            <span class="text-purple-700 font-bold uppercase">Cohort Retry Sequencer</span>
+          </div>
+        </div>
+
+        <!-- Category 4: B2B Receivables Chaser -->
+        <div class="elegostra-card p-6 flex flex-col justify-between space-y-4 hover:shadow-xl transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                <span>B2B Receivables</span>
+              </span>
+              <span id="cat-rec-active" class="text-[10px] font-mono text-slate-400 bg-slate-100 px-2 py-0.5 rounded">0 active</span>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono text-slate-400 uppercase">Recovered / At Risk</div>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-2xl font-black text-slate-900 font-mono" id="cat-rec-recovered">$0</span>
+                <span class="text-xs text-slate-400">/</span>
+                <span class="text-xs font-bold text-slate-500 font-mono" id="cat-rec-risk">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between text-[10px] font-mono text-slate-400">
+              <span>PROMISE-TO-PAY RESOLUTION</span>
+              <span class="text-amber-600 font-bold">88%</span>
+            </div>
+            <div class="flex gap-1">
+              <div class="h-2 flex-grow bg-amber-400 rounded-full"></div>
+              <div class="h-2 flex-grow bg-amber-300 rounded-full"></div>
+              <div class="h-2 flex-grow bg-amber-200 rounded-full"></div>
+              <div class="h-2 flex-grow bg-slate-100 rounded-full"></div>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-[10px] font-mono">
+            <span class="text-slate-400">INTERVENTION:</span>
+            <span class="text-amber-700 font-bold uppercase">Promise-to-pay Tracker</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 2: ACTIVE INTERVENTIONS TABLE -->
+    <div id="tab-interventions" class="tab-content space-y-6 hidden">
+      <div class="elegostra-card p-6 space-y-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">Active Recovery Interventions</h3>
+            <p class="text-xs text-slate-500 font-mono">AI Root-Cause Classification, Stepper Stages & Escalation</p>
+          </div>
+
+          <div class="flex flex-wrap gap-2" id="status-filters">
+            <button class="filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white font-mono" data-status="all">
+              All (<span id="count-all">0</span>)
+            </button>
+            <button class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 font-mono transition" data-status="detecting">
+              Detecting (<span id="count-detecting">0</span>)
+            </button>
+            <button class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 font-mono transition" data-status="intervening">
+              Intervening (<span id="count-intervening">0</span>)
+            </button>
+            <button class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 font-mono transition" data-status="failed">
+              Escalated (<span id="count-failed">0</span>)
+            </button>
+            <button class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 font-mono transition" data-status="recovered">
+              Recovered (<span id="count-recovered">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[760px]">
+            <thead>
+              <tr class="border-b border-slate-100 text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider bg-slate-50">
+                <th class="py-3.5 px-4 rounded-l-xl">Customer & Volume</th>
+                <th class="py-3.5 px-4">Category</th>
+                <th class="py-3.5 px-4">AI Diagnosis Root Cause</th>
+                <th class="py-3.5 px-4">Pipeline Stepper</th>
+                <th class="py-3.5 px-4">Intervention Strategy</th>
+                <th class="py-3.5 px-4 text-right rounded-r-xl">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="events-table-body" class="divide-y divide-slate-100 text-sm">
+              <tr>
+                <td colspan="6" class="py-16 text-center text-slate-400 font-mono text-xs">
+                  <i class="fa-solid fa-spinner fa-spin fa-2xl mb-3 block text-slate-800"></i>
+                  Querying real-time database transactions...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 3: LIVE AUDIT TRAIL CONSOLE -->
+    <div id="tab-audit" class="tab-content space-y-6 hidden">
+      <div class="elegostra-card p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div>
+              <h3 class="text-base font-bold text-slate-900 font-mono uppercase tracking-wider">Live System Audit Trail & Telemetry</h3>
+              <p class="text-xs text-slate-500">Chronological logging of agent diagnoses, compliant decisions, and execution outcomes</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-2" id="log-severity-filters">
+            <button class="px-3 py-1 rounded-lg bg-slate-900 text-xs font-mono text-white" data-severity="all">All Logs</button>
+            <button class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-mono text-emerald-700" data-severity="success">Success</button>
+            <button class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-mono text-amber-700" data-severity="warn">Warnings</button>
+            <button class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-mono text-rose-700" data-severity="error">Errors</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 rounded-2xl p-5 h-[480px] overflow-y-auto terminal-console text-xs font-mono space-y-2 text-slate-300" id="audit-log-view">
+          <span class="text-slate-500">[00:00:00] Initializing recovery worker audit stream...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: COMPLIANCE GUARDRAILS -->
+    <div id="tab-compliance" class="tab-content space-y-6 hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="elegostra-card p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                <i class="fa-solid fa-phone-slash text-sm"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-slate-900">Do-Not-Call (DND) Window</h4>
+                <p class="text-xs text-slate-500">Telephony & Voice Outreach Policy</p>
+              </div>
+            </div>
+            <span class="text-xs bg-emerald-50 text-emerald-800 font-mono px-2.5 py-1 rounded-full border border-emerald-200 font-bold">Active</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Restricts Hinglish Voice Recovery and AI call attempts between <strong>9:00 PM and 9:00 AM</strong> in the customer's local timezone.
+          </p>
+        </div>
+
+        <div class="elegostra-card p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center">
+                <i class="fa-solid fa-user-shield text-sm"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-slate-900">Transaction Limit Escalate</h4>
+                <p class="text-xs text-slate-500">High-Value Escalate Policy</p>
+              </div>
+            </div>
+            <span class="text-xs bg-indigo-50 text-indigo-800 font-mono px-2.5 py-1 rounded-full border border-indigo-200 font-bold">&gt; $500 Cap</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Any invoice exceeding <strong>$500.00</strong> requires a mandatory Human-in-the-Loop review before automatic retries.
+          </p>
+        </div>
+
+        <div class="elegostra-card p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center">
+                <i class="fa-solid fa-hand text-sm"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-slate-900">Intervention Attempt Caps</h4>
+                <p class="text-xs text-slate-500">Network Fraud & Score Protection</p>
+              </div>
+            </div>
+            <span class="text-xs bg-amber-50 text-amber-800 font-mono px-2.5 py-1 rounded-full border border-amber-200 font-bold">Max 3 Retries</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Halts mandate retry sequencer attempts upon reaching 3 failed triggers to protect merchant chargeback scores.
+          </p>
+        </div>
+
+        <div class="elegostra-card p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                <i class="fa-solid fa-file-contract text-sm"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-slate-900">Promise-to-Pay Tracker</h4>
+                <p class="text-xs text-slate-500">B2B Receivables Integrity</p>
+              </div>
+            </div>
+            <span class="text-xs bg-blue-50 text-blue-800 font-mono px-2.5 py-1 rounded-full border border-blue-200 font-bold">Verified</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Validates agreed payment terms and customer communications against auditable records before dispatching reminder cadences.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 5: SCENARIO SIMULATOR -->
+    <div id="tab-simulator" class="tab-content space-y-6 hidden">
+      <div class="elegostra-card p-8 space-y-6">
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Scenario Simulator Studio</h3>
+          <p class="text-xs text-slate-500 font-mono">Inject targeted revenue leakage anomalies into the pipeline to evaluate AI diagnosis & bounded actions in real-time.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="elegostra-card-subtle p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                <i class="fa-solid fa-credit-card"></i>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900">Payment Degradation</h4>
+              <p class="text-xs text-slate-500">Injects an overdue payment failure ($145) to trigger the mandate retry sequencer.</p>
+            </div>
+            <button onclick="injectScenario('payment')" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition font-mono">
+              Inject Anomaly
+            </button>
+          </div>
+
+          <div class="elegostra-card-subtle p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900">Checkout Drop-off</h4>
+              <p class="text-xs text-slate-500">Injects checkout abandonment ($89) to trigger Hinglish voice recovery outreach.</p>
+            </div>
+            <button onclick="injectScenario('checkout')" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition font-mono">
+              Inject Anomaly
+            </button>
+          </div>
+
+          <div class="elegostra-card-subtle p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center">
+                <i class="fa-solid fa-arrows-rotate"></i>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900">Failed Subscription</h4>
+              <p class="text-xs text-slate-500">Injects subscription billing degradation ($49) to trigger cohort retry & discount.</p>
+            </div>
+            <button onclick="injectScenario('subscription')" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition font-mono">
+              Inject Anomaly
+            </button>
+          </div>
+
+          <div class="elegostra-card-subtle p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900">B2B Receivables</h4>
+              <p class="text-xs text-slate-500">Injects high-value overdue invoice ($2,450) to test human escalation guardrails.</p>
+            </div>
+            <button onclick="injectScenario('receivables')" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition font-mono">
+              Inject Anomaly
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AUTHENTICATION MODAL -->
+  <div id="modal-auth" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+    <div class="elegostra-card max-w-md w-full p-8 space-y-6 shadow-2xl relative">
+      <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600">
+        <i class="fa-solid fa-xmark fa-lg"></i>
+      </button>
+
+      <div class="space-y-1 text-left">
+        <span class="text-[10px] font-mono font-bold text-lime-700 bg-lime-50 px-2 py-0.5 rounded uppercase">ARR Access Gateway</span>
+        <h3 class="text-2xl font-extrabold text-slate-900 tracking-tight">Sign in to Command Center</h3>
+        <p class="text-xs text-slate-500">Access real-time recovery pipelines and intervention controls.</p>
+      </div>
+
+      <form onsubmit="handleAuthSubmit(event)" class="space-y-4 text-left">
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-700 uppercase font-mono">Operator ID</label>
+          <input type="email" value="operator@arr-fintech.ai" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slate-900">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-700 uppercase font-mono">Password</label>
+          <input type="password" value="••••••••••••" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slate-900">
+        </div>
+        <button type="submit" class="w-full py-3 elegostra-pill-btn font-bold text-sm shadow-md">
+          Authenticate & Launch
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EVENT DETAIL INSPECTION MODAL -->
+  <div id="modal-detail" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+    <div class="elegostra-card max-w-2xl w-full overflow-hidden shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2 font-mono">
+          <i class="fa-solid fa-magnifying-glass text-lime-600"></i>
+          <span>Event Audit Trail Inspection</span>
+        </h3>
+        <button onclick="closeModal('modal-detail')" class="text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto text-left" id="modal-detail-content"></div>
+      <div class="px-6 py-4 border-t border-slate-100 flex justify-end bg-slate-50">
+        <button onclick="closeModal('modal-detail')" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-mono font-bold">
+          Close Inspection
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUMAN OVERRIDE RESOLVE MODAL -->
+  <div id="modal-resolve" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+    <div class="elegostra-card max-w-md w-full overflow-hidden shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2 font-mono">
+          <i class="fa-solid fa-user-shield text-rose-600"></i>
+          <span>Human-in-the-Loop Override</span>
+        </h3>
+        <button onclick="closeModal('modal-resolve')" class="text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form id="resolve-form" class="p-6 space-y-4 text-left">
+        <input type="hidden" id="resolve-event-id">
+        <div class="space-y-1.5">
+          <label for="resolve-notes" class="block text-xs font-mono font-bold text-slate-700 uppercase">Resolution Notes</label>
+          <textarea id="resolve-notes" rows="4" required placeholder="Explain why this at-risk transaction is resolved (e.g. B2B payment promise verified, retry bypassed)..." class="w-full p-3 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
+        </div>
+        <div class="flex justify-end space-x-3 pt-2">
+          <button type="button" onclick="closeModal('modal-resolve')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-mono font-bold">
+            Cancel
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-slate-900 text-white text-xs font-mono font-bold shadow">
+            Sign & Resolve
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Config: resolve backend dynamically (target port 5000 if not served on same port)
+    const BACKEND_URL = window.location.port === '5000' ? '' : 'http://127.0.0.1:5000';
+
+    // State Variables
+    let allEvents = [];
+    let allLogs = [];
+    let activeFilter = 'all';
+    let severityFilter = 'all';
+
+    // 1. PETAL CANVAS SCULPTURE (Pixel-inspired by Elegostra Screenshot 1 3D green flower/fan)
+    function drawPetalSculpture() {
+      const canvas = document.getElementById('petalCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const cx = canvas.width / 2;
+      const cy = canvas.height * 0.72;
+      const numPetals = 32;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = numPetals; i >= 0; i--) {
+        const angle = (i / numPetals) * Math.PI - (Math.PI / 2);
+        const radius = 180 - (i * 1.5);
+        const petalWidth = 24 + Math.sin(i * 0.2) * 6;
+        const petalHeight = 160 + (i % 2 === 0 ? 10 : 0);
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle * 0.95);
+
+        // Petal Gradient
+        const grad = ctx.createLinearGradient(0, -petalHeight, 0, 0);
+        grad.addColorStop(0, '#ecfccb'); // soft white-lime
+        grad.addColorStop(0.2, '#bef264'); // lime-300
+        grad.addColorStop(0.6, '#84cc16'); // lime-500
+        grad.addColorStop(1, '#15803d'); // deep emerald-700
+
+        ctx.beginPath();
+        ctx.moveTo(-petalWidth / 2, 0);
+        ctx.quadraticCurveTo(-petalWidth / 1.4, -petalHeight * 0.7, 0, -petalHeight);
+        ctx.quadraticCurveTo(petalWidth / 1.4, -petalHeight * 0.7, petalWidth / 2, 0);
+        ctx.closePath();
+
+        ctx.fillStyle = grad;
+        ctx.shadowColor = 'rgba(21, 128, 61, 0.15)';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+
+        // White Tip Highlight
+        ctx.beginPath();
+        ctx.moveTo(-petalWidth * 0.3, -petalHeight * 0.85);
+        ctx.quadraticCurveTo(0, -petalHeight, petalWidth * 0.3, -petalHeight * 0.85);
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+    }
+
+    // 2. VIEW NAVIGATION & AUTH FLOW
+    function launchDashboard() {
+      document.getElementById('view-landing').classList.add('hidden');
+      document.getElementById('view-dashboard').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      loadDashboardData();
+    }
+
+    function returnToLanding() {
+      document.getElementById('view-dashboard').classList.add('hidden');
+      document.getElementById('view-landing').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openAuthModal() { document.getElementById('modal-auth').classList.remove('hidden'); }
+    function closeAuthModal() { document.getElementById('modal-auth').classList.add('hidden'); }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      closeAuthModal();
+      launchDashboard();
+    }
+
+    // 3. DASHBOARD TABS
+    document.querySelectorAll('#dashboard-nav .nav-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.dataset.tab;
+        
+        document.querySelectorAll('#dashboard-nav .nav-tab').forEach(b => {
+          b.classList.remove('active', 'text-white', 'bg-slate-900', 'shadow');
+          b.classList.add('text-slate-600');
+        });
+        btn.classList.add('active', 'text-white', 'bg-slate-900', 'shadow');
+        btn.classList.remove('text-slate-600');
+
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.add('hidden');
+        });
+        document.getElementById(targetTab).classList.remove('hidden');
+      });
+    });
+
+    // 4. DATA FETCHING & SYNCHRONIZATION
+    const fmtUSD = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
+
+    async function loadDashboardData() {
+      try {
+        const workflowsRes = await fetch(`${BACKEND_URL}/api/workflows`);
+        if (workflowsRes.ok) {
+          allEvents = await workflowsRes.json();
+          updateFinancialLedger();
+          render4Channels();
+          renderEventsTable();
+          updateFilterCounts();
+        }
+
+        const logsRes = await fetch(`${BACKEND_URL}/api/logs`);
+        if (logsRes.ok) {
+          allLogs = await logsRes.json();
+          renderAuditLogs();
+        }
+      } catch (err) {
+        console.warn('Sync warning:', err);
+      }
+    }
+
+    function updateFinancialLedger() {
+      let batchRecovered = 0;
+      let batchRisk = 0;
+      let escalatedCount = 0;
+      let recoveredCount = 0;
+
+      allEvents.forEach(e => {
+        if (e.status === 'recovered') {
+          batchRecovered += e.amount;
+          recoveredCount++;
+        } else {
+          batchRisk += e.amount;
+        }
+        if (e.status === 'failed' || e.db_status === 'escalated') {
+          escalatedCount++;
+        }
+      });
+
+      const totalMeasured = 14205890 + batchRecovered;
+      
+      // Update Dashboard Ledger
+      document.getElementById('ledger-recovered').innerText = fmtUSD(totalMeasured);
+      document.getElementById('ledger-risk').innerText = fmtUSD(batchRisk);
+      document.getElementById('ledger-escalated').innerText = escalatedCount;
+      const ratio = allEvents.length > 0 ? Math.round((recoveredCount / allEvents.length) * 100) : 67;
+      document.getElementById('ledger-ratio').innerText = `${ratio}%`;
+
+      // Update Landing Hero numbers
+      document.getElementById('hero-recovered-val').innerText = fmtUSD(totalMeasured);
+      document.getElementById('hero-risk-val').innerText = fmtUSD(batchRisk || 12167);
+      document.getElementById('hero-incremental-val').innerText = `+${fmtUSD(batchRecovered || 42345)}`;
+      document.getElementById('impact-val').innerText = fmtUSD(batchRecovered || 42000) + '+';
+    }
+
+    function render4Channels() {
+      const cats = {
+        payment: { recovered: 0, risk: 0, active: 0 },
+        checkout: { recovered: 0, risk: 0, active: 0 },
+        subscription: { recovered: 0, risk: 0, active: 0 },
+        receivables: { recovered: 0, risk: 0, active: 0 }
+      };
+
+      allEvents.forEach(e => {
+        const cat = cats[e.type];
+        if (cat) {
+          if (e.status === 'recovered') cat.recovered += e.amount;
+          else cat.risk += e.amount;
+          if (e.status === 'detecting' || e.status === 'intervening') cat.active++;
+        }
+      });
+
+      // Dashboard Cards
+      document.getElementById('cat-payment-recovered').innerText = fmtUSD(cats.payment.recovered);
+      document.getElementById('cat-payment-risk').innerText = fmtUSD(cats.payment.risk);
+      document.getElementById('cat-payment-active').innerText = `${cats.payment.active} active`;
+
+      document.getElementById('cat-checkout-recovered').innerText = fmtUSD(cats.checkout.recovered);
+      document.getElementById('cat-checkout-risk').innerText = fmtUSD(cats.checkout.risk);
+      document.getElementById('cat-checkout-active').innerText = `${cats.checkout.active} active`;
+      const chkTotal = cats.checkout.recovered + cats.checkout.risk;
+      const chkRate = chkTotal > 0 ? Math.round((cats.checkout.recovered / chkTotal) * 100) : 42;
+      document.getElementById('cat-checkout-rate').innerText = `${chkRate}%`;
+      document.getElementById('cat-checkout-bar').style.width = `${chkRate}%`;
+
+      document.getElementById('cat-sub-recovered').innerText = fmtUSD(cats.subscription.recovered);
+      document.getElementById('cat-sub-risk').innerText = fmtUSD(cats.subscription.risk);
+      document.getElementById('cat-sub-active').innerText = `${cats.subscription.active} active`;
+
+      document.getElementById('cat-rec-recovered').innerText = fmtUSD(cats.receivables.recovered);
+      document.getElementById('cat-rec-risk').innerText = fmtUSD(cats.receivables.risk);
+      document.getElementById('cat-rec-active').innerText = `${cats.receivables.active} active`;
+
+      // Landing Section Cards
+      document.getElementById('card-payment-stat').innerText = `${fmtUSD(cats.payment.recovered || 6100)} / $10k`;
+      document.getElementById('card-checkout-stat').innerText = fmtUSD(cats.checkout.recovered || 28400);
+    }
+
+    function renderEventsTable() {
+      const tbody = document.getElementById('events-table-body');
+      const filtered = activeFilter === 'all'
+        ? allEvents
+        : allEvents.filter(e => e.status === activeFilter);
+
+      document.getElementById('tab-count-badge').innerText = allEvents.length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-16 text-center text-slate-400 font-mono text-xs">
+              <i class="fa-solid fa-folder-open fa-2xl mb-3 block text-slate-300"></i>
+              No active recovery interventions found matching status "${activeFilter}"
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(e => {
+        let catBadge = 'bg-slate-100 text-slate-700';
+        if (e.type === 'checkout') catBadge = 'bg-blue-50 text-blue-700 border-blue-200';
+        else if (e.type === 'subscription') catBadge = 'bg-purple-50 text-purple-700 border-purple-200';
+        else if (e.type === 'payment') catBadge = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        else if (e.type === 'receivables') catBadge = 'bg-amber-50 text-amber-700 border-amber-200';
+
+        const confVal = e.confidence || 0.92;
+        const confPct = Math.round(confVal * 100);
+
+        return `
+          <tr class="hover:bg-slate-50 transition border-b border-slate-100">
+            <td class="py-4 px-4 font-mono">
+              <div class="font-bold text-slate-900 text-sm">${e.customer}</div>
+              <div class="text-[11px] text-slate-400">Vol: <span class="text-slate-900 font-bold">${fmtUSD(e.amount)}</span></div>
+            </td>
+            <td class="py-4 px-4">
+              <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-mono font-bold border ${catBadge}">
+                ${e.type.toUpperCase()}
+              </span>
+            </td>
+            <td class="py-4 px-4">
+              <div class="flex items-center space-x-2">
+                <span class="font-mono text-xs text-slate-800 capitalize font-semibold">${e.reason_category ? e.reason_category.replace(/_/g, ' ') : 'Analyzing...'}</span>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">${confPct}% conf</span>
+              </div>
+            </td>
+            <td class="py-4 px-4">
+              ${renderStepper(e.status)}
+            </td>
+            <td class="py-4 px-4 font-mono text-xs text-slate-700">
+              <div class="capitalize font-semibold">${e.intervention}</div>
+            </td>
+            <td class="py-4 px-4 text-right space-x-1.5">
+              <button onclick="openDetailModal('${e.id}')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-mono font-bold text-slate-700 transition">
+                Inspect
+              </button>
+              ${e.status === 'failed' || e.db_status === 'escalated'
+                ? `<button onclick="openResolveModal('${e.id}')" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-xs font-mono font-bold text-white shadow transition">
+                    Resolve
+                   </button>`
+                : ''
+              }
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderStepper(status) {
+      let stage = 1;
+      if (status === 'intervening') stage = 2;
+      else if (status === 'recovered' || status === 'failed') stage = 3;
+
+      const isResolved = status === 'recovered';
+      const isFailed = status === 'failed';
+
+      return `
+        <div class="flex items-center space-x-1.5 font-mono text-[10px]" title="Stage: ${status}">
+          <span class="w-2.5 h-2.5 rounded-full ${stage >= 1 ? 'bg-slate-900' : 'bg-slate-200'}"></span>
+          <span class="w-3 h-0.5 ${stage >= 2 ? 'bg-slate-900' : 'bg-slate-200'}"></span>
+          <span class="w-2.5 h-2.5 rounded-full ${stage >= 2 ? 'bg-slate-900' : 'bg-slate-200'}"></span>
+          <span class="w-3 h-0.5 ${stage >= 3 ? (isResolved ? 'bg-emerald-500' : (isFailed ? 'bg-rose-500' : 'bg-slate-900')) : 'bg-slate-200'}"></span>
+          <span class="w-2.5 h-2.5 rounded-full ${stage >= 3 ? (isResolved ? 'bg-emerald-500' : (isFailed ? 'bg-rose-500' : 'bg-slate-900')) : 'bg-slate-200'}"></span>
+        </div>
+      `;
+    }
+
+    function renderAuditLogs() {
+      const consoleEl = document.getElementById('audit-log-view');
+      const filtered = allLogs.filter(log => {
+        if (severityFilter === 'all') return true;
+        return log.type === severityFilter;
+      });
+
+      if (filtered.length === 0) {
+        consoleEl.innerHTML = `<span class="text-slate-500">[00:00:00] Initializing recovery worker audit stream...</span>`;
+        return;
+      }
+
+      consoleEl.innerHTML = filtered.map(log => {
+        let typeColor = 'text-sky-400';
+        if (log.type === 'success') typeColor = 'text-emerald-400';
+        else if (log.type === 'warn') typeColor = 'text-amber-400';
+        else if (log.type === 'error') typeColor = 'text-rose-400';
+
+        return `<div class="leading-relaxed hover:bg-slate-900/50 p-0.5 rounded">
+                  <span class="text-slate-500">[${log.timestamp}]</span>
+                  <span class="${typeColor}">${log.message}</span>
+                </div>`;
+      }).join('');
+    }
+
+    function updateFilterCounts() {
+      const counts = { all: allEvents.length, detecting: 0, intervening: 0, failed: 0, recovered: 0 };
+      allEvents.forEach(e => {
+        if (counts[e.status] !== undefined) counts[e.status]++;
+      });
+      document.getElementById('count-all').innerText = counts.all;
+      document.getElementById('count-detecting').innerText = counts.detecting;
+      document.getElementById('count-intervening').innerText = counts.intervening;
+      document.getElementById('count-failed').innerText = counts.failed;
+      document.getElementById('count-recovered').innerText = counts.recovered;
+    }
+
+    // 5. EVENT LISTENERS & SCENARIO INJECTION
+    document.querySelectorAll('#status-filters .filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#status-filters .filter-btn').forEach(b => {
+          b.classList.remove('active', 'bg-slate-900', 'text-white');
+          b.classList.add('text-slate-600', 'bg-slate-50');
+        });
+        btn.classList.add('active', 'bg-slate-900', 'text-white');
+        btn.classList.remove('text-slate-600', 'bg-slate-50');
+        activeFilter = btn.dataset.status;
+        renderEventsTable();
+      });
+    });
+
+    document.querySelectorAll('#log-severity-filters button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#log-severity-filters button').forEach(b => {
+          b.classList.remove('bg-slate-900', 'text-white');
+          b.classList.add('bg-slate-100');
+        });
+        btn.classList.add('bg-slate-900', 'text-white');
+        btn.classList.remove('bg-slate-100');
+        severityFilter = btn.dataset.severity;
+        renderAuditLogs();
+      });
+    });
+
+    async function triggerScan(scenario = null) {
+      const icon = document.getElementById('quick-run-icon');
+      const spinner = document.getElementById('quick-run-spinner');
+      if (icon) icon.classList.add('hidden');
+      if (spinner) spinner.classList.remove('hidden');
+
+      try {
+        const body = scenario ? JSON.stringify({ scenario }) : null;
+        const res = await fetch(`${BACKEND_URL}/api/simulate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: body
+        });
+        if (res.ok) {
+          await loadDashboardData();
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        if (icon) icon.classList.remove('hidden');
+        if (spinner) spinner.classList.add('hidden');
+      }
+    }
+
+    function triggerQuickSimulation() {
+      triggerScan();
+      setTimeout(() => { launchDashboard(); }, 400);
+    }
+
+    const quickBtn = document.getElementById('btn-quick-simulate');
+    if (quickBtn) quickBtn.addEventListener('click', () => triggerScan());
+    function injectScenario(type) { triggerScan(type); }
+
+    const resetBtn = document.getElementById('btn-quick-reset');
+    if (resetBtn) resetBtn.addEventListener('click', async () => {
+      if (confirm("Reset database logs to initial demo state?")) {
+        try {
+          const res = await fetch(`${BACKEND_URL}/api/reset`, { method: 'POST' });
+          if (res.ok) {
+            alert("Database reset complete.");
+            await loadDashboardData();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+
+    const resolveForm = document.getElementById('resolve-form');
+    if (resolveForm) resolveForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const eventId = document.getElementById('resolve-event-id').value;
+      const notes = document.getElementById('resolve-notes').value;
+
+      try {
+        const res = await fetch(`${BACKEND_URL}/events/${eventId}/resolve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ notes })
+        });
+        if (res.ok) {
+          closeModal('modal-resolve');
+          await loadDashboardData();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function openDetailModal(id) {
+      const event = allEvents.find(e => e.id === id);
+      if (!event) return;
+
+      const content = document.getElementById('modal-detail-content');
+      content.innerHTML = `
+        <div class="grid grid-cols-2 gap-4 text-xs font-mono border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-slate-400 uppercase font-bold text-[10px]">Event Trace ID</span>
+            <div class="text-slate-900 font-bold break-all bg-slate-50 p-2 rounded mt-1">${event.id}</div>
+          </div>
+          <div>
+            <span class="text-slate-400 uppercase font-bold text-[10px]">Customer Identifier</span>
+            <div class="text-slate-900 font-bold bg-slate-50 p-2 rounded mt-1">${event.customer}</div>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 text-xs font-mono">
+          <span class="text-slate-400 uppercase font-bold text-[10px]">AI Diagnostic Root-Cause Assessment</span>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-900 capitalize">${event.reason_category ? event.reason_category.replace(/_/g, ' ') : 'Analyzing...'}</span>
+              <span class="bg-lime-100 text-lime-800 font-bold px-2 py-0.5 rounded text-[10px]">Confidence: ${Math.round(event.confidence * 100)}%</span>
+            </div>
+            <p class="text-slate-600 font-sans leading-relaxed">${event.explanation || 'Root cause classified by Groq LLM model.'}</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 text-xs font-mono">
+          <div>
+            <span class="text-slate-400 uppercase font-bold text-[10px]">Planned Intervention</span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 mt-1 space-y-1">
+              <div class="font-bold text-slate-900 capitalize">${event.action ? event.action.replace(/_/g, ' ') : 'Pending'}</div>
+              <div class="text-[10px] text-slate-500">Requires Human Review: <strong class="text-amber-600">${event.db_status === 'escalated' ? 'Yes' : 'No'}</strong></div>
+            </div>
+          </div>
+          <div>
+            <span class="text-slate-400 uppercase font-bold text-[10px]">Execution Result</span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 mt-1 space-y-1">
+              <div class="font-bold ${event.result === 'success' ? 'text-emerald-600' : 'text-slate-900'} capitalize">
+                Outcome: ${event.result || 'In Flight'}
+              </div>
+              <div class="text-[10px] text-slate-500 line-clamp-2" title="${event.detail || ''}">
+                ${event.detail || 'Bounded workflow active.'}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 text-xs font-mono">
+          <span class="text-slate-400 uppercase font-bold text-[10px]">Raw Anomaly Payload</span>
+          <pre class="bg-slate-950 text-slate-300 p-4 rounded-xl overflow-x-auto border border-slate-800 max-h-36 text-[10px]">${JSON.stringify(event.raw_payload, null, 2)}</pre>
+        </div>
+      `;
+      openModal('modal-detail');
+    }
+
+    function openResolveModal(id) {
+      document.getElementById('resolve-event-id').value = id;
+      document.getElementById('resolve-notes').value = '';
+      openModal('modal-resolve');
+    }
+
+    // ON DOM LOAD
+    window.addEventListener('DOMContentLoaded', () => {
+      drawPetalSculpture();
+      loadDashboardData();
+      setInterval(loadDashboardData, 3000);
+    });
+  </script>
+</body>
+</html>
