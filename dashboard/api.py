@@ -28,11 +28,31 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Resolve DB file absolute path relative to this script
-DB_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "revenue_recovery.db")
+# Resolve DB file absolute path (Vercel uses writable /tmp directory)
+import shutil
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_DB = os.path.join(BASE_DIR, "revenue_recovery.db")
+
+if os.environ.get("VERCEL"):
+    DB_FILE = "/tmp/revenue_recovery.db"
+    if not os.path.exists(DB_FILE) and os.path.exists(DEFAULT_DB):
+        try:
+            shutil.copyfile(DEFAULT_DB, DB_FILE)
+        except Exception:
+            pass
+else:
+    DB_FILE = DEFAULT_DB
 
 def get_connection():
+    # If on Vercel and DB doesn't exist in /tmp yet, try copying from bundled app
+    if os.environ.get("VERCEL") and not os.path.exists(DB_FILE) and os.path.exists(DEFAULT_DB):
+        try:
+            shutil.copyfile(DEFAULT_DB, DB_FILE)
+        except Exception:
+            pass
     return sqlite3.connect(DB_FILE)
+
 
 
 class ResolveRequest(BaseModel):
