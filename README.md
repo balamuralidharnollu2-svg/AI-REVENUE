@@ -20,21 +20,18 @@ Every event — a payment failure, an abandoned checkout, an overdue invoice —
 %%{init: {
   "theme": "base",
   "themeVariables": {
-    "background": "#ffffff",
-    "primaryColor": "#ffffff",
-    "primaryBorderColor": "#000000",
-    "primaryTextColor": "#000000",
-    "secondaryColor": "#f2f2f2",
-    "secondaryBorderColor": "#000000",
-    "secondaryTextColor": "#000000",
-    "tertiaryColor": "#ffffff",
-    "tertiaryBorderColor": "#000000",
-    "tertiaryTextColor": "#000000",
-    "lineColor": "#000000",
-    "textColor": "#000000",
-    "fontSize": "18px",
-    "clusterBkg": "#ffffff",
-    "clusterBorder": "#000000"
+    "lineColor": "#2563eb",
+    "primaryColor": "#f8fafc",
+    "primaryBorderColor": "#3b82f6",
+    "primaryTextColor": "#0f172a",
+    "secondaryColor": "#dcfce7",
+    "secondaryBorderColor": "#10b981",
+    "secondaryTextColor": "#0f172a",
+    "tertiaryColor": "#fee2e2",
+    "tertiaryBorderColor": "#ef4444",
+    "tertiaryTextColor": "#0f172a",
+    "edgeLabelBackground": "#ffffff",
+    "fontSize": "14px"
   }
 }}%%
 flowchart TD
@@ -60,6 +57,16 @@ flowchart TD
     Node12 -- Retry allowed --> Node2
 
     Node11 --> END3(("END<br/>Blocked / Stopped<br/>visible in /api/logs"))
+
+    classDef primary fill:#f8fafc,stroke:#3b82f6,stroke-width:2px,color:#0f172a;
+    classDef success fill:#dcfce7,stroke:#10b981,stroke-width:2px,color:#065f46;
+    classDef warn fill:#fef3c7,stroke:#f59e0b,stroke-width:2px,color:#92400e;
+    classDef danger fill:#fee2e2,stroke:#ef4444,stroke-width:2px,color:#991b1b;
+
+    class Node1,Node2,Node3,Node4,Node5,Node7,Node8,Node9,Node10,Node12 primary;
+    class END2 success;
+    class Node6,END1 warn;
+    class Node11,END3 danger;
 ```
 
 ---
@@ -72,25 +79,21 @@ This is the core loop — every payment failure, abandoned checkout, or overdue 
 %%{init: {
   "theme": "base",
   "themeVariables": {
-    "background": "#ffffff",
-    "primaryColor": "#ffffff",
-    "primaryBorderColor": "#000000",
-    "primaryTextColor": "#000000",
-    "actorBkg": "#ffffff",
-    "actorBorder": "#000000",
-    "actorTextColor": "#000000",
-    "actorLineColor": "#000000",
-    "signalColor": "#000000",
-    "signalTextColor": "#000000",
-    "labelBoxBkgColor": "#ffffff",
-    "labelBoxBorderColor": "#000000",
-    "labelTextColor": "#000000",
-    "loopTextColor": "#000000",
-    "noteBkgColor": "#f2f2f2",
-    "noteBorderColor": "#000000",
-    "noteTextColor": "#000000",
-    "sequenceNumberColor": "#000000",
-    "fontSize": "18px"
+    "signalColor": "#2563eb",
+    "signalTextColor": "#0f172a",
+    "actorBkg": "#f8fafc",
+    "actorBorder": "#2563eb",
+    "actorTextColor": "#0f172a",
+    "actorLineColor": "#3b82f6",
+    "labelBoxBkgColor": "#f8fafc",
+    "labelBoxBorderColor": "#2563eb",
+    "labelTextColor": "#0f172a",
+    "loopTextColor": "#0f172a",
+    "noteBkgColor": "#fef3c7",
+    "noteBorderColor": "#f59e0b",
+    "noteTextColor": "#78350f",
+    "sequenceNumberColor": "#2563eb",
+    "fontSize": "14px"
   }
 }}%%
 sequenceDiagram
@@ -121,13 +124,12 @@ sequenceDiagram
 %%{init: {
   "theme": "base",
   "themeVariables": {
-    "background": "#ffffff",
-    "primaryColor": "#ffffff",
-    "primaryBorderColor": "#000000",
-    "primaryTextColor": "#000000",
-    "lineColor": "#000000",
-    "textColor": "#000000",
-    "fontSize": "18px"
+    "lineColor": "#2563eb",
+    "primaryColor": "#f8fafc",
+    "primaryBorderColor": "#2563eb",
+    "primaryTextColor": "#0f172a",
+    "textColor": "#0f172a",
+    "fontSize": "14px"
   }
 }}%%
 erDiagram
